@@ -1,0 +1,6 @@
+**/output.txt
+node_modules
+**/build/*
+**/bin/*
+**/obj/Release/*
+**/obj/Debug/*

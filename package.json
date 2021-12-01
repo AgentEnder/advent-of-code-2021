@@ -1,0 +1,23 @@
+{
+    "name": "advent-of-code-2021",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "start": "ts-node run-solutions.ts"
+    },
+    "author": "",
+    "license": "ISC",
+    "devDependencies": {
+        "@types/node": "^16.11.11",
+        "ts-node": "^10.4.0",
+        "typescript": "^4.5.2"
+    },
+    "dependencies": {
+        "colors": "^1.4.0",
+        "fast-glob": "^3.2.7",
+        "ignore": "^5.1.9",
+        "tslib": "^2.3.1"
+    }
+}
