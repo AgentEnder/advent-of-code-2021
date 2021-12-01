@@ -1,0 +1,22 @@
+python-sln.py		21.179
+
+Part 1: 1713
+Part 2: 1734
+
+rust-sln.rs		477.903
+Build 470.442, Run: 7.462
+
+Part 1: 1713
+Part 2: 1734
+
+ts-sln.ts		2460.319
+Build 2427.148, Run: 33.170
+
+Part 1: 1713
+Part 2: 1734
+
+cs-sln/day-1.csproj		1084.442
+Build 892.523, Run: 191.919
+
+Part 1: 1713
+Part 2: 1734
