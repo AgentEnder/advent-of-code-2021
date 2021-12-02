@@ -5,8 +5,16 @@ import { readFileSync, writeFileSync } from "fs";
 import { extname, join, dirname, parse, resolve } from "path";
 import { performance } from "perf_hooks";
 import Ignore from "ignore";
+import yargsParser from "yargs-parser";
 
-const problemDirectories = globSync("day-*", { onlyDirectories: true });
+const argv = yargsParser(process.argv.slice(2));
+let problemDirectories = globSync("day-*", { onlyDirectories: true });
+
+if (argv.day) {
+    problemDirectories = [
+        problemDirectories.find((x) => x === `day-${argv.day}`),
+    ];
+}
 
 const executeCommand: Record<
     string,
@@ -41,7 +49,7 @@ const executeCommand: Record<
             build: `kotlinc ${file} -include-runtime -d ./build/${name}.jar`,
             run: `java -jar ./build/${name}.jar`,
         };
-    }
+    },
 };
 
 const ignore = Ignore();

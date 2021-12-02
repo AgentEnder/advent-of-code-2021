@@ -1,0 +1,4 @@
+{
+    "rust-client.revealOutputChannelOn": "info",
+    "rust-client.rustupPath": "~/.cargo/bin/rustup"
+}

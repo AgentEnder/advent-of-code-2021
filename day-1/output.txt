@@ -1,28 +1,28 @@
-kotlin-sln.kt		5175.039
-Build 5076.470, Run: 98.568
-
-1713
-1734
-
-python-sln.py		19.234
+kotlin-sln.kt		5118.383
+Build 4985.885, Run: 132.498
 
 Part 1: 1713
 Part 2: 1734
 
-rust-sln.rs		645.223
-Build 638.921, Run: 6.302
+python-sln.py		19.783
 
 Part 1: 1713
 Part 2: 1734
 
-ts-sln.ts		2856.631
-Build 2821.544, Run: 35.087
+rust-sln.rs		640.343
+Build 634.053, Run: 6.290
 
 Part 1: 1713
 Part 2: 1734
 
-cs-sln/day-1.csproj		1331.207
-Build 1139.505, Run: 191.702
+ts-sln.ts		3301.974
+Build 3266.129, Run: 35.845
+
+Part 1: 1713
+Part 2: 1734
+
+cs-sln/day-1.csproj		1133.747
+Build 943.624, Run: 190.123
 
 Part 1: 1713
 Part 2: 1734
