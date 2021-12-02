@@ -13,3 +13,4 @@ This assumes the following commands are available on PATH
 - `rustc --version`
 - `node`
 - `npx`
+- `kotlinc -help`

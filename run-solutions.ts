@@ -34,6 +34,13 @@ const executeCommand: Record<
             build: `npx tsc ${file} --outDir build`,
             run: `node ./build/${name}.js`,
         };
+    },
+    ".kt": (file) => {
+        const name = parse(file).name;
+        return {
+            build: `kotlinc ${file} -include-runtime -d ./build/${name}.jar`,
+            run: `java -jar ./build/${name}.jar`,
+        };
     }
 };
 
