@@ -1,16 +1,16 @@
-python-sln.py		19.439
+python-sln.py		17.124ms
 
 Part 1: 1654760
 Part 1: 1956047400
 
-rust-sln.rs		2300.543
-Build 2294.305, Run: 6.238
+ts-sln.ts		2350.286ms
+Build 2318.334ms, Run: 31.953ms
 
 Part 1: 1654760
 Part 2: 1956047400
 
-ts-sln.ts		2591.288
-Build 2556.530, Run: 34.758
+rust-sln/rust-sln.rs		442.162ms
+Build 434.564ms, Run: 7.598ms
 
 Part 1: 1654760
 Part 2: 1956047400

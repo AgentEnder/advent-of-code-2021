@@ -10,6 +10,8 @@ import yargsParser from "yargs-parser";
 const argv = yargsParser(process.argv.slice(2));
 let problemDirectories = globSync("day-*", { onlyDirectories: true });
 
+const debug = argv.debug || process.env.DEBUG == "true";
+
 if (argv.day) {
     problemDirectories = [
         problemDirectories.find((x) => x === `day-${argv.day}`),
@@ -22,8 +24,9 @@ const executeCommand: Record<
 > = {
     ".py": (file) => `python3 ${file}`,
     ".csproj": (file) => {
-        const outDir = join(dirname(file), "build");
-        const dllPath = join(outDir, parse(file).name) + ".dll";
+        const { dir, name } = parse(file);
+        const outDir = join("build", dir, name);
+        const dllPath = join(outDir, name) + ".dll";
         return {
             build: `dotnet build ${file} -c Release -o ${outDir}`,
             run: `dotnet ${dllPath}`,
@@ -66,59 +69,78 @@ problemDirectories.forEach((directory) => {
 
     for (const file of solutionFiles) {
         const extension = extname(file);
-        const cwd = join(directory, dirname(file));
+        const cwd = directory;
         if (!(extension in executeCommand)) {
             continue;
         }
-        const relativePath = join(directory, file);
-        console.log("Running ", relativePath);
-        const command = executeCommand[extension](resolve(relativePath));
-        if (typeof command === "string") {
-            const start = performance.now();
-            const stdout = execSync(command, {
-                cwd,
-                input,
-            }).toString();
-            const end = performance.now();
-            lines.push(`${file}\t\t${formatTime(end - start)}`);
-            lines.push("");
-            lines.push(stdout);
-        } else {
-            const start = performance.now();
-            execSyncButLogErrors(command.build, {
-                cwd,
-            }).toString();
-            const buildEnd = performance.now();
-            const stdout = execSync(command.run, {
-                cwd,
-                input,
-            }).toString();
-            const end = performance.now();
-            lines.push(`${file}\t\t${formatTime(end - start)}`);
-            lines.push(
-                `Build ${formatTime(buildEnd - start)}, Run: ${formatTime(
-                    end - buildEnd
-                )}`
+        process.stdout.write("Running " + file + "\x1B[0G");
+        const command = executeCommand[extension](file);
+        try {
+            let start: number;
+            let end: number;
+            if (typeof command === "string") {
+                start = performance.now();
+                const stdout = execSync(command, {
+                    cwd,
+                    input,
+                }).toString();
+                end = performance.now();
+                lines.push(`${file}\t\t${formatTime(end - start)}`);
+                lines.push("");
+                lines.push(stdout);
+            } else {
+                start = performance.now();
+                execSyncButLogErrors(command.build, {
+                    cwd,
+                }).toString();
+                const buildEnd = performance.now();
+                const stdout = execSync(command.run, {
+                    cwd,
+                    input,
+                }).toString();
+                end = performance.now();
+                lines.push(`${file}\t\t${formatTime(end - start)}`);
+                lines.push(
+                    `Build ${formatTime(buildEnd - start)}, Run: ${formatTime(
+                        end - buildEnd
+                    )}`
+                );
+                lines.push("");
+                lines.push(stdout);
+            }
+            console.log(
+                "Running " +
+                    file +
+                    new Array(50 - file.length - 8).join(" ") +
+                    `✔ ${formatTime(end - start)}`
             );
-            lines.push("");
-            lines.push(stdout);
+        } catch (e) {
+            console.log(
+                "Running " +
+                    file +
+                    new Array(50 - file.length - 8).join(" ") +
+                    "X"
+            );
         }
     }
-
     writeFileSync(join(directory, "output.txt"), lines.join("\n"));
+    console.log("");
 });
 
 function execSyncButLogErrors(cmd, options: ExecSyncOptionsWithBufferEncoding) {
     try {
         return execSync(cmd, options);
     } catch (e) {
-        console.log("\n", red("ERROR:"), e.message);
-        console.log("\n\t", yellow("stdout"), e.stdout.toString());
-        console.log("\n\t", yellow("stderr"), e.stderr.toString());
-        process.exit(1);
+        if (debug) {
+            console.log("\n", red("ERROR:"), e.message);
+            console.log("\n\t", yellow("stdout"), e.stdout.toString());
+            console.log("\n\t", yellow("stderr"), e.stderr.toString());
+            process.exit(1);
+        }
+        throw e;
     }
 }
 
 function formatTime(ms: number) {
-    return ms.toFixed(3);
+    return ms.toFixed(3) + "ms";
 }
