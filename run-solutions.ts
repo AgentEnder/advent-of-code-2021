@@ -76,20 +76,20 @@ problemDirectories.forEach((directory) => {
         process.stdout.write("Running " + file + "\x1B[0G");
         const command = executeCommand[extension](file);
         try {
-            let start: number;
-            let end: number;
+            let timeString: string;
             if (typeof command === "string") {
-                start = performance.now();
+                const start = performance.now();
                 const stdout = execSync(command, {
                     cwd,
                     input,
                 }).toString();
-                end = performance.now();
-                lines.push(`${file}\t\t${formatTime(end - start)}`);
+                const end = performance.now();
+                timeString = formatTime(end - start);
+                lines.push(`${file}\t\t${timeString}`);
                 lines.push("");
                 lines.push(stdout);
             } else {
-                start = performance.now();
+                const start = performance.now();
                 execSyncButLogErrors(command.build, {
                     cwd,
                 }).toString();
@@ -98,13 +98,12 @@ problemDirectories.forEach((directory) => {
                     cwd,
                     input,
                 }).toString();
-                end = performance.now();
+                const end = performance.now();
+                const runTime = formatTime(end - buildEnd);
+                const buildTime = formatTime(buildEnd - start);
+                timeString = `${runTime} (build: ${buildTime})`;
                 lines.push(`${file}\t\t${formatTime(end - start)}`);
-                lines.push(
-                    `Build ${formatTime(buildEnd - start)}, Run: ${formatTime(
-                        end - buildEnd
-                    )}`
-                );
+                lines.push(`Build ${buildTime}, Run: ${runTime}`);
                 lines.push("");
                 lines.push(stdout);
             }
@@ -112,7 +111,7 @@ problemDirectories.forEach((directory) => {
                 "Running " +
                     file +
                     new Array(50 - file.length - 8).join(" ") +
-                    `✔ ${formatTime(end - start)}`
+                    `✔ ${timeString}`
             );
         } catch (e) {
             console.log(
