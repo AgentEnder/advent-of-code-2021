@@ -1,0 +1,5 @@
+ts-sln.ts		2386.304ms
+Build 2329.242ms, Run: 57.062ms
+
+Part 1: 328318
+Part 2: 89791146
