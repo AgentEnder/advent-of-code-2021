@@ -42,7 +42,7 @@ const executeCommand: Record<
     ".ts": (file) => {
         const name = parse(file).name;
         return {
-            build: `npx tsc ${file} --outDir build`,
+            build: `npx tsc ${file} --outDir build --target es2015 --module commonjs`,
             run: `node ./build/${name}.js`,
         };
     },
