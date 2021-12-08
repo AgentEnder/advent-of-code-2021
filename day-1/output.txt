@@ -1,28 +1,28 @@
-kotlin-sln.kt		5486.109ms
-Build 5415.387ms, Run: 70.723ms
+kotlin-sln.kt		5087.812ms
+Build 4846.003ms, Run: 241.809ms
 
 Part 1: 1713
 Part 2: 1734
 
-python-sln.py		18.489ms
+python-sln.py		22.838ms
 
 Part 1: 1713
 Part 2: 1734
 
-ts-sln.ts		2416.670ms
-Build 2386.238ms, Run: 30.432ms
+ts-sln.ts		2471.786ms
+Build 2434.358ms, Run: 37.428ms
 
 Part 1: 1713
 Part 2: 1734
 
-cs-sln/day-1.csproj		1118.218ms
-Build 928.740ms, Run: 189.478ms
+cs-sln/day-1.csproj		1228.341ms
+Build 1037.427ms, Run: 190.914ms
 
 Part 1: 1713
 Part 2: 1734
 
-rust-sln/rust-sln.rs		498.663ms
-Build 493.200ms, Run: 5.464ms
+rust-sln/rust-sln.rs		550.565ms
+Build 533.209ms, Run: 17.356ms
 
 Part 1: 1713
 Part 2: 1734

@@ -1,0 +1,4 @@
+python-sln.py		51.087ms
+
+Part 1: 38594
+Part 2: 21184
