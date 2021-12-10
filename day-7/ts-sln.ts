@@ -39,4 +39,3 @@ console.log(
         ([posA, costA], [posB, costB]) => costA - costB
     )[0][1]
 );
-// console.log("Part 2:", fishAfterDays(fishByAge, 256));
